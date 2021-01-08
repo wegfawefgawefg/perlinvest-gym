@@ -24,7 +24,7 @@ class PerlinvestGym:
         '''
         self.verbose = verbose
         self.STARTING_MONEY = 100
-        self.MAX_EPISODE_LENGTH = 1000
+        self.MAX_EPISODE_LENGTH = 100
         self.action_space = (3,)
         self.observation_space = (3,)
 
@@ -66,11 +66,13 @@ class PerlinvestGym:
         
         ###         EPISODE TERMINATION CONDS.      ###
         done = False
+        if self.money < 50:
+            done = True
         if self.step_count >= self.MAX_EPISODE_LENGTH:
             done = True
 
-        reward = 0
-
+        reward = 1.0
+        
         info = None
         
         return state_, reward, done, info
